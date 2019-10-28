@@ -396,9 +396,12 @@ li.sfHover ul li:first-child a{background-image:url(../images/arrow_menu.gif); b
 
 
 /*** AFTER HEADER ***/
-#after-header{padding:40px 0}
-#after-header h1{font-family: Apple LiGothic Medium, SimHei;font-size:35px; line-height:37px; text-transform:uppercase; text-align:center; color:#dc6a4d; margin:0;}
-
+#afterheadercol1{display: inline-block; margin-right:20px;}
+#afterheadercol2{float: right; position: relative;top: 34px;right: 10px;}
+#after-header{padding:35px 0}
+#afterheadercol1 h1{font-family: Apple LiGothic Medium, SimHei;font-size:32px; line-height:34px; color:#dc6a4d; text-align: left;margin-left: 15px;margin-bottom: 0;}
+#afterheadercol1 span{font-size: 15px;font-family: Georgia, 'Times New Roman', Times, serif ;color: #555555;}
+#afterheadercol2 a span{font-size: 18px;font-family: Georgia, 'Times New Roman', Times, serif ;color: #dc6a4d;text-align: right;margin-right: 15px;}
 /*** BEFORE CONTENT ***/
 #before-content{position:relative; margin-bottom:20px}
 #before-content .shadow{background:url(../images/glow.png) repeat-x; width:100%; height:12px; position:absolute; top:0;}
@@ -406,7 +409,7 @@ li.sfHover ul li:first-child a{background-image:url(../images/arrow_menu.gif); b
 /*** CONTENT ***/
 #content{}
 #content.withsidebar{background:url(../images/bg-content-inner.gif) repeat-y;}
-#main{padding:40px;}
+#main{padding:35px;}
 #maincontent{float:left; width:610px; padding-right:25px;}
 
 /*** CONTENT EMEMENT ***/
@@ -773,7 +776,7 @@ tr.odd td {
 #footer ul{list-style-type:none; margin:0; padding:0;}
 #footer ul li.widget-container{margin-bottom:40px;}
 #footer ul li.widget-container:last-child{margin-bottom:0px;}
-#footer .widget-title{color:#fafafa; text-transform:uppercase; margin-bottom:25px; font-size:14px}
+#footer .widget-title{font-family: Georgia;color:#fafafa; text-transform: none; margin-bottom:25px; font-size:14px}
 #footer ul li a, #footer ul li a:visited{color:#aaa}
 #footer ul li a:hover{text-decoration:none; color:#fff}
 #footer ul li li{border-bottom:solid 1px #4a4a4a; padding:0 0 6px 0; margin:0 0 6px 0;}
@@ -782,6 +785,7 @@ tr.odd td {
 #footer .frame{padding:4px; border:solid 1px #424242; background:url(../images/opacity-img.png) repeat}
 
 #recentpostwidget h5{font-size:12px; font-family:Arial; margin-bottom:5px}
+#recentpostwidget span{font-size: 6px;}
 #footer #recentpostwidget li h5 a, #footer #recentpostwidget li h5 a:visited{color:#fafafa}
 #recentpostwidget li{clear:both; margin:0 0 30px 0 !important; border:0px !important; padding:0 !important; background:transparent !important}
 
@@ -790,7 +794,7 @@ tr.odd td {
 
 
 /*** AFTER FOOTER ***/
-#after-footer{background:url(../images/bg-afterfooter.png) no-repeat; height:80px;}
+#after-footer{background:url(../images/bg-afterfooter2.png) no-repeat; height:80px;}
 #footertext{padding:30px 0 0 0;color:#aaaaaa}
 #sn{float:right; padding:25px 0 0 0}
 #sn ul{margin:0; padding:0; list-style-type:none;}
