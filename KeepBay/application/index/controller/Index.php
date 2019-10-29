@@ -16,4 +16,18 @@ class Index extends Controller
     {
     	return view('contact');
     }
+    public function login()
+    {
+        return view('login');
+    }
+    public function getUserInfo() {
+        $username = input('post.username');
+        echo($username);
+    }
+    public function register() {
+        $username = input('post.username');
+        $password = input('post.password');
+        $sex = input('post.sex');
+        echo $username ."<br>". $password ."<br>". $sex;
+    }
 }
