@@ -12,10 +12,6 @@ class Index extends Controller
     {
     	return view('product');
     }
-    public function services()
-    {
-    	return view('services');
-    }
     public function contact()
     {
     	return view('contact');

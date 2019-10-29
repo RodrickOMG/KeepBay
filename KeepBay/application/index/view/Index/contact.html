@@ -6,7 +6,7 @@
 <meta name="robots" content="index, follow" />
 <meta name="keywords" content="" />
 <meta name="description" content="" />
-<title>Magnum</title>
+<title>KeepBay</title>
 <!-- ////////////////////////////////// -->
 <!-- //      Start Stylesheets       // -->
 <!-- ////////////////////////////////// -->
@@ -23,6 +23,7 @@
 <script type="text/javascript" src="../../../../public/static/js/superfish.js"></script> 
 <script type="text/javascript" src="../../../../public/static/js/supersubs.js"></script>
 <script type="text/javascript" src="../../../../public/static/js/contact.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?key=&v=1.1&services=true"></script>
 <script type="text/javascript">
 jQuery(document).ready(function(){
 	//Menu
@@ -58,7 +59,7 @@ jQuery(document).ready(function(){
             <div id="nav">
                 <ul id="topnav" class="sf-menu">
                     <li><a href="/index">首页</a></li>
-                    <li><a href="/index/index/Index/product">商品</a>
+                    <li><a href="/index/index/Index/product">产品</a>
                         <ul>
                             <li><a href="portfolio.html">Portfolio One Column</a></li>
                             <li><a href="portfolio2.html">Portfolio Two Column</a></li>
@@ -66,7 +67,6 @@ jQuery(document).ready(function(){
                             <li><a href="portfolio4.html">Portfolio Four Column</a></li>
                         </ul>
                     </li>
-                    <li><a href="/index/index/Index/services">服务</a></li>
                     <li><a href="/index/index/Index/contact" class="current">联系我们</a></li>
                 </ul><!-- #topnav -->
             </div><!-- #nav -->	
@@ -75,8 +75,7 @@ jQuery(document).ready(function(){
         <div id="header" class="innerpage">
         	<div class="shadow"></div>
         	<div class="container940">
-        		<h1 class="pagetitle">Contact Us</h1>
-                <div class="pagedesc">This can be your Tagline or something you want.</div>
+        		<h1 class="pagetitle">联系我们</h1>
                 <div class="clear"></div><!-- clear float -->
             </div><!-- end container940 -->
         </div><!-- end #header -->
@@ -85,8 +84,8 @@ jQuery(document).ready(function(){
 		<div id="content" class="withsidebar">
         	<div id="main">
             	<div id="maincontent">
-                    <h2 class="title_pattern uppercase"><span>Keep In Touch With Us</span></h2>
-                    <p>Proin sed sem ante. Integer lacus orci, lacinia blandit euismod sed, sagittis et magna. Pellentesque gravida fermentum pulvinar. <span class="colortext">Cras id convallis urna.</span> Fusce eget leo quis tellus blandit porta. Mauris porta facilisis lacus, a ultricies lacus sagittis a. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. </p>
+                    <h2 class="title_pattern uppercase"><span>与我们保持联系</span></h2>
+                    <p>让我们了解自己的表现如何。选择以下适用的反馈选项 (我们会阅读每一条反馈，但不能保证全部回复)： </p>
                     
                     <div class="separator line"></div>
                     
@@ -94,22 +93,22 @@ jQuery(document).ready(function(){
                     <div id="contactform">
                       <form id="contact" action="#">
                         <fieldset>
-                          <label for="name" id="name_label">Name:</label>
+                          <label for="name" id="name_label">姓名:</label>
                           <input type="text" name="name" id="name"  value="" class="text-input" /><br/>
-                          <label for="email" id="email_label">E-mail:</label>
+                          <label for="email" id="email_label">电子邮箱:</label>
                           <input type="text" name="email" id="email"  value="" class="text-input" /><br/>
-                          <label for="subject" id="subject_label">Subject:</label>
+                          <label for="subject" id="subject_label">主题:</label>
                           <input type="text" name="subject" id="subject"  value="" class="text-input" /><br/>
-                          <label for="msg" id="msg_label">Message:</label>
+                          <label for="msg" id="msg_label">信息:</label>
                          <textarea cols="60" rows="10" name="msg" id="msg" ></textarea> <br class="clear" />
-                          <input type="submit" name="submit" class="butcontact" id="submit_btn" value="Submit"/>
+                          <input type="submit" name="submit" class="butcontact" id="submit_btn" value="提交"/>
                         </fieldset>
                       </form>
                       <br class="clear" />
-                      <span class="error" id="name_error">Please enter name !</span>
-                      <span class="error" id="email_error">Please enter email address !</span>
-                      <span class="error" id="email_error2">Please enter valid email address !</span>
-                      <span class="error" id="msg_error">Please enter message !</span>
+                      <span class="error" id="name_error">请输入姓名 !</span>
+                      <span class="error" id="email_error">请输入电子邮箱 !</span>
+                      <span class="error" id="email_error2">请输入有效的电子邮箱 !</span>
+                      <span class="error" id="msg_error">请输入信息 !</span>
                       
                     </div><!-- end #contactform -->
                     
@@ -118,22 +117,22 @@ jQuery(document).ready(function(){
                 <div id="sidebar">
                 	<ul>
                     	<li class="widget-container">
-                        	<h2 class="widget-title">Contact Us</h2>
+                        	<h2 class="widget-title">联系我们</h2>
                             <div class="textwidget">
-                           <p> Magnum - Office Blvd No. 356-357<br/>
+                           <p> KeepBay - Office Blvd No. 356-357<br/>
                             Farmville Town, LA 12345</p>
                             <p>
-                            Telp: +62 500 800 123<br/>
-                            Fax: +62 500 800 112<br/>
-                            Email: <a href="mailto:testmail@yourdomain.com" class="colortext">testmail@yourdomain.com</a><br/>
-                            Website: <a href="http://www.templatesquare.com" class="colortext">www.templatesquare.com</a><br/>
+                            电话: +62 500 800 123<br/>
+                            传真: +62 500 800 112<br/>
+                            电子邮件: <a href="mailto:rodrickomg99@gmail.com" class="colortext">rodrickomg99@gmail.com</a><br/>
+                            网站: <a href="http://www.cqu.edu.cn" class="colortext">www.keepbay.com</a><br/>
                             </p>
                             </div>
                         </li>
                     	<li class="widget-container">
-                        	<h2 class="widget-title">Our Map</h2>
+                        	<h2 class="widget-title">地图</h2>
                             <div class="textwidget">
-                            <iframe style="width:270px; height:250px; border:0; margin:0" src="http://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=Jalan+Kemanggisan+Utama,+Jakarta,+Indonesia&amp;sll=37.0625,-95.677068&amp;sspn=46.092115,79.013672&amp;ie=UTF8&amp;hq=&amp;hnear=Jalan+Kemanggisan+Utama,+Jakarta+Barat,+Jakarta,+Indonesia&amp;ll=-6.189793,106.7908&amp;spn=0.016639,0.034246&amp;z=14&amp;iwloc=A&amp;output=embed"></iframe><br /><small><a href="http://maps.google.com/maps?f=q&amp;source=embed&amp;hl=en&amp;geocode=&amp;q=Jalan+Kemanggisan+Utama,+Jakarta,+Indonesia&amp;sll=37.0625,-95.677068&amp;sspn=46.092115,79.013672&amp;ie=UTF8&amp;hq=&amp;hnear=Jalan+Kemanggisan+Utama,+Jakarta+Barat,+Jakarta,+Indonesia&amp;ll=-6.189793,106.7908&amp;spn=0.016639,0.034246&amp;z=14&amp;iwloc=A" style="text-align:left; color:#555">View Larger Map</a></small>
+                                    <div style="width:100%;height:250px;border:#ccc solid 1px;" id="dituContent"></div>
                             </div>
                         </li>
                     </ul>
@@ -146,68 +145,58 @@ jQuery(document).ready(function(){
 		<div id="footer">
         <div id="footer-pattern">
         
-			<div class="container940">
-            	<div id="footcol1">
-                	<ul>
-                    	<li class="widget-container">
-                            <h2 class="widget-title">Latest Articles</h2>
-                            <ul id="recentpostwidget">
-                                <li>
-                                    <img src="../../../../public/static/images/content/pic5.jpg" alt="" class="alignleft frame" />
-                                    <h5><a href="#">Hello World!!</a></h5>
-                                    <span>Lorem ipsum dolor sit amet...</span>
-                                </li>
-                                <li>
-                                    <img src="../../../../public/static/images/content/pic6.jpg" alt="" class="alignleft frame" />
-                                    <h5><a href="#">Hello World!!</a></h5>
-                                    <span>Lorem ipsum dolor sit amet...</span>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-                <div id="footcol2">
-                	<ul>
-                        <li class="widget-container">
-                        	<h2 class="widget-title">Blogroll</h2>
+                <div class="container940">
+                        <div id="footcol1">
                             <ul>
-                            	<li><a href="#">Vivamus hendrerit venenatis quam</a></li>
-                                <li><a href="#">Aenean congue nisl in nibh</a></li>
-                                <li><a href="#">Proin tempus tempus orci eu imperdiet</a></li>
-                                <li><a href="#">Mauris interdum</a></li>
-                                <li><a href="#">Donec id turpis at risus</a></li>
+                                <li class="widget-container">
+                                    <h2 class="widget-title">选购及了解</h2>
+                                        <ul>
+                                            <li><a href="#">全身性健身器械</a></li>
+                                            <li><a href="#">局部性健身器械</a></li>
+                                            <li><a href="#">小型健身器材</a></li>
+                                        </ul>
+                                </li>
                             </ul>
-                        </li>
-                    </ul>
-                </div>
-                <div id="footcol3">
-                	<ul>
-                        <li class="widget-container">
-                        	<h2 class="widget-title">Gallery</h2>
-                            <ul id="flickr">
-                            	<li><a href="#"><img src="../../../../public/static/images/content/pic7.jpg" alt="" class="frame" /></a></li>
-                                <li><a href="#"><img src="../../../../public/static/images/content/pic8.jpg" alt="" class="frame" /></a></li>
-                                <li class="nomargin"><a href="#"><img src="../../../../public/static/images/content/pic9.jpg" alt="" class="frame" /></a></li>
-                                <li><a href="#"><img src="../../../../public/static/images/content/pic10.jpg" alt="" class="frame" /></a></li>
-                                <li><a href="#"><img src="../../../../public/static/images/content/pic11.jpg" alt="" class="frame" /></a></li>
-                                <li class="nomargin"><a href="#"><img src="../../../../public/static/images/content/pic12.jpg" alt="" class="frame" /></a></li>
+                        </div>
+                        <div id="footcol2">
+                            <ul>
+                                <li class="widget-container">
+                                    <h2 class="widget-title">工具与App</h2>
+                                    <ul>
+                                        <li><a href="#">下载</a></li>
+                                        <li><a href="#">开发人员</a></li>
+                                        <li><a href="#">安全中心</a></li>
+                                        <li><a href="#">网站导览</a></li>
+                                    </ul>
+                                </li>
                             </ul>
-                        </li>
-                    </ul>
-                </div>
-                <div id="footcol4">
-                	<ul>
-                        <li class="widget-container">
-                        	<h2 class="widget-title">About Magnum</h2>
-                            <div class="textwidget">
-                            <p>
-                            Nulla interdum, enim eu dictum pellentesque, ipsum elit varius purus, et imperdiet odio magna lobortis purus. 
-                            </p>
-                            <span>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Vivamus sed mauris at eros mollis ultricies vitae porta dui. </span>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
+                        </div>
+                        <div id="footcol3">
+                            <ul>
+                                <li class="widget-container">
+                                    <h2 class="widget-title">健身社区</h2>
+                                    <ul>
+                                        <li><a href="#">公告</a></li>
+                                        <li><a href="#">资讯中心</a></li>
+                                        <li><a href="#">讨论区</a></li>
+                                        <li><a href="#">热门推荐</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <div id="footcol4">
+                            <ul>
+                                <li class="widget-container">
+                                    <h2 class="widget-title">关于KeepBay</h2>
+                                    <ul>
+                                        <li><a href="#">公司简介</a></li>
+                                        <li><a href="#">新闻</a></li>
+                                        <li><a href="#">工作机会</a></li>
+                                        <li><a href="#">广告机会</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
            
             <div class="clear"></div><!-- clear float -->
             </div><!-- end container940 -->
@@ -237,4 +226,44 @@ jQuery(document).ready(function(){
 </div><!-- end #outer-container -->
 		
 </body>
+<script type="text/javascript">
+    //创建和初始化地图函数：
+    function initMap(){
+        createMap();//创建地图
+        setMapEvent();//设置地图事件
+        addMapControl();//向地图添加控件
+    }
+    
+    //创建地图函数：
+    function createMap(){
+        var map = new BMap.Map("dituContent");//在百度地图容器中创建一个地图
+        var point = new BMap.Point(106.475195,29.571111);//定义一个中心点坐标
+        map.centerAndZoom(point,17);//设定地图的中心点和坐标并将地图显示在地图容器中
+        window.map = map;//将map变量存储在全局
+    }
+    
+    //地图事件设置函数：
+    function setMapEvent(){
+        map.enableDragging();//启用地图拖拽事件，默认启用(可不写)
+        map.enableScrollWheelZoom();//启用地图滚轮放大缩小
+        map.enableDoubleClickZoom();//启用鼠标双击放大，默认启用(可不写)
+        map.enableKeyboard();//启用键盘上下左右键移动地图
+    }
+    
+    //地图控件添加函数：
+    function addMapControl(){
+        //向地图中添加缩放控件
+	var ctrl_nav = new BMap.NavigationControl({anchor:BMAP_ANCHOR_TOP_LEFT,type:BMAP_NAVIGATION_CONTROL_LARGE});
+	map.addControl(ctrl_nav);
+        //向地图中添加缩略图控件
+	var ctrl_ove = new BMap.OverviewMapControl({anchor:BMAP_ANCHOR_BOTTOM_RIGHT,isOpen:0});
+	map.addControl(ctrl_ove);
+        //向地图中添加比例尺控件
+	var ctrl_sca = new BMap.ScaleControl({anchor:BMAP_ANCHOR_BOTTOM_LEFT});
+	map.addControl(ctrl_sca);
+    }
+    
+    
+    initMap();//创建和初始化地图
+</script>
 </html>
