@@ -29,30 +29,38 @@ class Index extends Controller
     public function login() {
         $model = model('User');
         $username = input('post.username');
+        $password = input('post.password');
         $find_user = $model->getUser($username);
         if ($find_user) {
             //echo($username);
-            $this->assign('username',$username);
-            Session::set('username',$username);
-            $loginname = Session::get('username');
-            $this->assign('loginname',$loginname);
             $current_user = $find_user[0];
-            $this->assign('sex',$current_user['sex']);
-            return view('user');
+            if($current_user['password'] == $password) {
+                $this->assign('username',$username);
+                Session::set('username',$username);
+                $loginname = Session::get('username');
+                $this->assign('loginname',$loginname);
+                $this->assign('sex',$current_user['sex']);
+                $this->assign('address',$current_user['address']);
+                return view('user');
+            } else {
+                $loginname = Session::get('username');
+                $this->assign('loginname',$loginname);
+                echo "<script type='text/javascript' >alert('密码错误')</script>";
+                return view('index');
+            }
+            
         } else {
             $loginname = Session::get('username');
             $this->assign('loginname',$loginname);
-            echo "<script type='text/javascript' >alert('该用户不存在，请先登录')</script>";
+            echo "<script type='text/javascript' >alert('该用户不存在，请先注册')</script>";
             return view('index');
         }
         
     }
     public function register() {
         $username = input('post.username');
-        $this->assign('username',$username);
         $password = input('post.password');
         $sex = input('post.sex');
-        $this->assign('sex',$sex);
         //echo $username ."<br>". $password ."<br>". $sex;
         $model = model('User');
         $find_username = $model->getUser($username);
@@ -62,12 +70,15 @@ class Index extends Controller
             echo "<script type='text/javascript' >alert('该用户已存在')</script>";
             return view('index');
         } else {
-            $data  = input("post.");
-            $res = Db::execute("insert into user value(:username, :password, :sex)", $data);
+            $this->assign('username',$username);
+            $this->assign('sex',$sex);
+            $model->register($username, $password, $sex);
             Session::set('username',$username);
             Session::set('sex',$sex);
             $loginname = Session::get('username');
             $this->assign('loginname',$loginname);
+            $address = $model->getUserAddress($username);
+            $this->assign('address',$address);
             return view('user');
         }
         
@@ -83,6 +94,9 @@ class Index extends Controller
         $this->assign('username',$username);
         $sex = Session::get('sex');
         $this->assign('sex',$sex);
+        $model = model('User');
+        $address = $model->getUserAddress($username);
+        $this->assign('address',$address);
         return view('user');
     }
     
