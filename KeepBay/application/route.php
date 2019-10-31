@@ -16,6 +16,7 @@ Route::rule('/contact/','"/index/Index/contact');
 Route::rule('/gotouser/','"/index/Index/gotouser');
 Route::rule('/login/','"/index/Index/login');
 Route::rule('/register/','"/index/Index/register');
+Route::rule('/logout/','"/index/Index/logout');
 
 
 return [
