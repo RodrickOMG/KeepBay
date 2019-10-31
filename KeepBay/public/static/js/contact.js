@@ -11,6 +11,13 @@ jQuery(function() {
       jQuery("input#name").focus();
       return false;
     }
+
+    var username = jQuery("input#username").val();
+		if (username == "") {
+      jQuery("span#username_error").show();
+      jQuery("input#username").focus();
+      return false;
+    }
 	
 	
 	  var email = jQuery("input#email").val();

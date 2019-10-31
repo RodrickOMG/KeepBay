@@ -8,6 +8,15 @@
 // +----------------------------------------------------------------------
 // | Author: liu21st <liu21st@gmail.com>
 // +----------------------------------------------------------------------
+use think\Route;
+
+
+Route::rule('/product/','"/index/Index/product');
+Route::rule('/contact/','"/index/Index/contact');
+Route::rule('/gotouser/','"/index/Index/gotouser');
+Route::rule('/login/','"/index/Index/login');
+Route::rule('/register/','"/index/Index/register');
+
 
 return [
     '__pattern__' => [

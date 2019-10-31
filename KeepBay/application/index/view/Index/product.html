@@ -6,10 +6,11 @@
 <meta name="robots" content="index, follow" />
 <meta name="keywords" content="" />
 <meta name="description" content="" />
-<title>Magnum</title>
+<title>KeepBay</title>
 <!-- ////////////////////////////////// -->
 <!-- //      Start Stylesheets       // -->
 <!-- ////////////////////////////////// -->
+<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
 <link href="../../../../public/static/styles/style.css" rel="stylesheet" type="text/css" />
 <link href="../../../../public/static/styles/inner.css" rel="stylesheet" type="text/css" />
 <!--[if lt IE 9]>
@@ -18,6 +19,8 @@
 <!-- ////////////////////////////////// -->
 <!-- //      Javascript Files        // -->
 <!-- ////////////////////////////////// -->
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="../../../../public/static/js/jquery-1.6.4.min.js"></script>
 <script type="text/javascript" src="../../../../public/static/js/hoverIntent.js"></script> 
 <script type="text/javascript" src="../../../../public/static/js/superfish.js"></script> 
@@ -36,6 +39,38 @@ jQuery(document).ready(function(){
 					 
 });
 </script>
+<script type="text/javascript">
+    function checkLoginForm() {
+        var un = document.getElementById("username");
+        var pw = document.getElementById("password");
+        if(un.value == "") {
+            alert("用户名不能为空");
+            return false;
+        } else if (pw.value == "") {
+            alert("密码不能为空");
+            return false;
+        } else {
+            return true;
+        }
+    }
+    function checkRegisterForm() {
+        var sex = document.getElementById("sex");
+        var un = document.getElementById("username_log");
+        var pw = document.getElementById("password_log");
+        if(un.value == "") {
+            alert("用户名不能为空");
+            return false;
+        } else if (pw.value == "") {
+            alert("密码不能为空");
+            return false;
+        } else if (sex.value == "") {
+            alert("性别不能为空");
+            return false;
+        } else {
+            return true;
+        }
+    }
+</script>
 </head>
 <body>
 <div style="text-align:center;height:90px; width:100%;">
@@ -50,6 +85,8 @@ jQuery(document).ready(function(){
 </script>
 </div>
 
+<input type="hidden" id = "loginname" value="{$loginname}"><!--用来获取$loginname-->
+
 <div id="outer-container">
 	<div id="container">
     	<div id="top">
@@ -57,7 +94,7 @@ jQuery(document).ready(function(){
             <div id="nav">
                 <ul id="topnav" class="sf-menu">
                     <li><a href="/index">首页</a></li>
-                    <li><a href="/index/index/Index/product" class="current">产品</a>
+                    <li><a href="/index/product" class="current">产品</a>
                         <ul>
                             <li><a href="portfolio.html">Portfolio One Column</a></li>
                             <li><a href="portfolio2.html">Portfolio Two Column</a></li>
@@ -65,209 +102,138 @@ jQuery(document).ready(function(){
                             <li><a href="portfolio4.html">Portfolio Four Column</a></li>
                         </ul>
                     </li>
-                    <li><a href="/index/index/Index/contact">联系我们</a></li>
+                    <li><a href="/index/contact">联系我们</a></li>
+                    <li><button class="login" data-toggle="modal" data-target="#login"  data-backdrop="false"><div id="notlogin1"></div>
+                    </button></li>
+                <li><div id="separator"></div></li>
+                <li><button class="login" data-toggle="modal" data-target="#register"  data-backdrop="false"><div id="notlogin2"></div>
+                    </button></li>
+                <li><a href="/index/gotouser"><div id="userinfo"></div></a></li>
                 </ul><!-- #topnav -->
             </div><!-- #nav -->	
         </div><!-- end #top -->
         
+         <!-- 模态框（Modal） -->
+        <div class="modal fade" id="login" tabindex="-1" role="dialog">
+                <form action="/index/login" method="POST" onsubmit="return checkLoginForm()">
+                    <div class="modal-dialog" role="document" style="width: 300px;height:270px;margin-top: 250px;">
+                    <div class="modal-content" >
+                        <div class="modal-header myModal-header">
+                        <button type="button" class="close myModal-header-close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 id="myModalLabel">登录</h4>
+                        </div>
+                                
+                        <div class="modal-body myModal-body">
+                            <div class="form-group">
+                                <label for="username" class="myModal-header-font">帐号</label>
+                                <div>
+                                    <input type="text" name="username" class="form-control myModal-input myModal-header-font" id="username" style="width:100%;" placeholder="请输入帐号" >
+                                </div>
+                            </div>
+                    
+                            <div class="form-group">
+                                <label for="password" class="control-label myModal-header-font">密码</label>
+                                <div>
+                                    <input type="password" name="password" class="form-control myModal-input myModal-header-font" style="border:solid 1px #ececec; font-size:11px; padding:8px 5px; border-radius:4px; -moz-border-radius:4px; -webkit-border-radius:4px;" id="password" placeholder="请输入密码">
+                                </div>
+                            </div>
+    
+                        </div><!--end modal-body myModal-body-->
+                
+                        <div class="modal-footer myModal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal" style="width:40px;height:24px;padding:1px;float:right;margin-right:30px;color:white;background-color:#1E253F;border:0px">取消
+                            </button>
+                            <button type="submit" id="login" class="btn btn-primary" style="float:left;margin-left:30px;width:40px;height:24px;padding:1px">确定
+                            </button>
+                        </div><!--end modal-footer myModal-footer-->
+                        </div>
+                    </form>
+                </div>
+            </div>
+    
+    
+            <div class="modal fade" id="register" tabindex="-1" role="dialog">
+                    <form action="/index/register" method="POST" onsubmit="return checkRegisterForm()">
+                        <div class="modal-dialog" role="document" style="width: 300px;height:270px;margin-top: 250px;">
+                        <div class="modal-content" >
+                            <div class="modal-header myModal-header">
+                            <button type="button" class="close myModal-header-close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 id="myModalLabel">注册</h4>
+                            </div>
+                                    
+                            <div class="modal-body myModal-body">
+                            <div class="form-group">
+                                <label for="username" class="myModal-header-font">帐号</label>
+                                <div>
+                                    <input type="text" name="username" class="form-control myModal-input myModal-header-font" id="username_log" style="width:100%;" placeholder="请输入帐号" >
+                                </div>
+                            </div>
+                    
+                            <div class="form-group">
+                                <label for="password" class="control-label myModal-header-font">密码</label>
+                                <div>
+                                    <input type="password" name="password" class="form-control myModal-input myModal-header-font" style="border:solid 1px #ececec; font-size:11px; padding:8px 5px; border-radius:4px; -moz-border-radius:4px; -webkit-border-radius:4px;" id="password_log" placeholder="请输入密码">
+                                </div>
+                            </div>
+    
+                            <div class="form-group">
+                                    <label for="name" class="myModal-header-font">性别</label>
+                                    <select name="sex" style="border:solid 1px #ececec; font-size:11px; padding:8px 5px; border-radius:4px; -moz-border-radius:4px; -webkit-border-radius:4px;" id="sex" class="form-control myModal-input myModal-header-font myModal-select">
+                                        <option selected="selected" disabled="disabled"  style='display: none' value=''></option>
+                                        <option>男</option>
+                                        <option>女</option>
+                                        <option>保密</option>
+                                    </select>
+                            </div>
+                            
+                            </div><!--end modal-body myModal-body-->
+                    
+                            <div class="modal-footer myModal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal" style="width:40px;height:24px;padding:1px;float:right;margin-right:30px;color:white;background-color:#1E253F;border:0px">取消
+                                </button>
+                                <button type="submit" id="login" class="btn btn-primary" style="float:left;margin-left:30px;width:40px;height:24px;padding:1px">确定
+                                </button>
+                            </div><!--end modal-footer myModal-footer-->
+                        </div>
+                    </form>
+                    </div>
+                </div>
+
+
         <div id="header" class="innerpage">
         	<div class="shadow"></div>
         	<div class="container940">
-        		<h1 class="pagetitle">Product</h1>
-                <div class="pagedesc">This can be your Tagline or something you want.</div>
+        		<h1 class="pagetitle">产品</h1>
                 <div class="clear"></div><!-- clear float -->
             </div><!-- end container940 -->
         </div><!-- end #header -->
         
         
-		<div id="content" class="withsidebar">
+		<div id="content">
         	<div id="main">
-            	<div id="maincontent">
-                    
-                     <div id="ts-display-product-container">
-                     <ul id="ts-display-product">
-                        <li>
-                            <div class="ts-display-product-img">
-                               <a href="single-product.html"> <img src="../../../../public/static/images/content/product/prod1.jpg" alt="" /></a>
-                            </div>
-                            <div class="ts-display-product-text">
-                            <h2 class="colortext">Toshiba Laptop 24’</h2>
-                            <span class="productprice">$ 870.00</span>
-                            <a href="single-product.html" class="button">Add to Cart</a>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="ts-display-product-img">
-                               <a href="single-product.html"> <img src="../../../../public/static/images/content/product/prod2.jpg" alt="" /></a>
-                            </div>
-                            <div class="ts-display-product-text">
-                            <h2 class="colortext">Keyboard Vista</h2>
-                            <span class="productprice">$ 150.00</span>
-                            <a href="single-product.html" class="button">Add to Cart</a>
-                            </div>
-                        </li>
-                        <li class="nomargin">
-                            <div class="ts-display-product-img">
-                               <a href="single-product.html"> <img src="../../../../public/static/images/content/product/prod3.jpg" alt="" /></a>
-                            </div>
-                            <div class="ts-display-product-text">
-                            <h2 class="colortext">Scanner and Printer</h2>
-                            <span class="productprice">$ 270.00</span>
-                            <a href="single-product.html" class="button">Add to Cart</a>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="ts-display-product-img">
-                               <a href="single-product.html"> <img src="../../../../public/static/images/content/product/prod4.jpg" alt="" /></a>
-                            </div>
-                            <div class="ts-display-product-text">
-                            <h2 class="colortext">HD - Apple</h2>
-                            <span class="productprice">$ 470.00</span>
-                            <a href="single-product.html" class="button">Add to Cart</a>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="ts-display-product-img">
-                               <a href="single-product.html"> <img src="../../../../public/static/images/content/product/prod5.jpg" alt="" /></a>
-                            </div>
-                            <div class="ts-display-product-text">
-                            <h2 class="colortext">iPad- Apple</h2>
-                            <span class="productprice">$ 500.00</span>
-                            <a href="single-product.html" class="button">Add to Cart</a>
-                            </div>
-                        </li>
-                        <li class="nomargin">
-                            <div class="ts-display-product-img">
-                               <a href="single-product.html"> <img src="../../../../public/static/images/content/product/prod6.jpg" alt="" /></a>
-                            </div>
-                            <div class="ts-display-product-text">
-                            <h2 class="colortext">Nokia N8</h2>
-                            <span class="productprice">$ 550.00</span>
-                            <a href="single-product.html" class="button">Add to Cart</a>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="ts-display-product-img">
-                               <a href="single-product.html"> <img src="../../../../public/static/images/content/product/prod7.jpg" alt="" /></a>
-                            </div>
-                            <div class="ts-display-product-text">
-                            <h2 class="colortext">Mouse Track</h2>
-                            <span class="productprice">$ 9.00</span>
-                            <a href="single-product.html" class="button">Add to Cart</a>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="ts-display-product-img">
-                               <a href="single-product.html"> <img src="../../../../public/static/images/content/product/prod8.jpg" alt="" /></a>
-                            </div>
-                            <div class="ts-display-product-text">
-                            <h2 class="colortext">Headphone - Sony</h2>
-                            <span class="productprice">$ 11.00</span>
-                            <a href="single-product.html" class="button">Add to Cart</a>
-                            </div>
-                        </li>
-                        <li class="nomargin">
-                            <div class="ts-display-product-img">
-                               <a href="single-product.html"> <img src="../../../../public/static/images/content/product/prod9.jpg" alt="" /></a>
-                            </div>
-                            <div class="ts-display-product-text">
-                            <h2 class="colortext">PSP 3D - Sony</h2>
-                            <span class="productprice">$ 300.00</span>
-                            <a href="single-product.html" class="button">Add to Cart</a>
-                            </div>
-                        </li>
+                     <ul id="ts-display-product" style="margin-left: 54px;">
+                        {volist name="data" id="value" }
+                            <li>
+                                <div class="ts-display-product-img">
+                                   <a href="single-product.html"> <img src="../../../../public/static/images/content/product/prod1.jpg" alt="" /></a>
+                                </div>
+                                <div class="ts-display-product-text">
+                                <h2 class="colortext">{$value.name}</h2>
+                                <span class="productprice">¥ {$value.price}</span>
+                                <a href="single-product.html" class="button">Add to Cart</a>
+                                </div>
+                            </li>
+                        {/volist}
                      </ul>
                      
                       <div class="separator line"></div>
                      
                      </div><!-- end #ts-display-product -->
                      
-                     
-                     <div class="pagenavi productnav">
-                        <a href="" class="page">1</a><span class="current">2</span><a href="" class="page">3</a><a href="" class="nextpostslink">Next &raquo;</a>
-                    </div><!-- end pagenavi -->
-
-                     <form class="prod_ordering" method="post">
-                        <select name="catalog_orderby" class="orderby">
-                            <option value="title"  selected='selected'>Alphabetically</option><option value="date" >Most Recent</option><option value="price" >Price</option>			</select>
-                    </form>
-                     
                      <div class="clear"></div><!-- clear float -->
                 </div><!-- end #maincontent -->
-                <div id="sidebar">
-                	<ul>
-                    	<li class="widget-container">
-                            <h2 class="widget-title">Shooping Cart</h2>
-                            <ul id="shoppingcartwidget">
-                                <li>
-                                    <a href="#"><img src="../../../../public/static/images/content/product/lp4.jpg" alt="" class="alignleft" /></a>
-                                    <span class="colortext">New Printer XP</span><br/>
-                                    <span>1x  $ 950.00</span>
-                                    <span class="clear"></span>
-                                </li>
-                                <li>
-                                    <a href="#"><img src="../../../../public/static/images/content/product/lp5.jpg" alt="" class="alignleft" /></a>
-                                    <span class="colortext">New Camera Digital 16MP</span><br/>
-                                    <span>1x  $ 550.00</span>
-                                    <span class="clear"></span>
-                                </li>
-                            </ul>
-                            <div class="shopping_textwidget">
-                                <span class="totalprice">Subtotal:  $1500.00</span>
-                                <a href="#" class="button">View Cart</a>
-                                <a href="#" class="button">Checkout</a>
-                            </div>
-                        </li>
-                    	<li class="widget-container">
-                        	<h2 class="widget-title">Customer Login</h2>
-                            <form action="#" method="get" id="login">
-                            <fieldset>
-                            <label for="username" id="username_label">Username</label>
-                            <input type="text" name="username" id="username" /><br/><br/>
-                            <label for="password" id="password_label">Password</label>
-                            <input type="text" name="password" id="password" /><br/><br/>
-                            <div class="lost"><a href="#" class="colortext">Lost Password?</a></div>
-                            <input type="submit" name="submit" value="Login"/>
-                            </fieldset>
-                            </form>
-                        </li>
-                    	<li class="widget-container">
-                        	<h2 class="widget-title">Product Categories</h2>
-                            <ul>
-                            	<li><a href="#">All Categories</a></li>
-                                <li><a href="#">Computer (20)</a></li>
-                                <li><a href="#">Handphone (30)</a></li>
-                                <li><a href="#">Photography (15)</a></li>
-                            </ul>
-                        </li>
-                    	<li class="widget-container">
-                            <h2 class="widget-title">Featured Products</h2>
-                            <ul id="recentproductwidget">
-                                <li>
-                                    <a href="#"><img src="../../../../public/static/images/content/product/lp1.jpg" alt="" class="alignleft" /></a>
-                                    <span class="colortext">Sony Camera 13MP</span><br/>
-                                    <span>$ 350.00</span>
-                                    <span class="clear"></span>
-                                </li>
-                                <li>
-                                    <a href="#"><img src="../../../../public/static/images/content/product/lp2.jpg" alt="" class="alignleft" /></a>
-                                    <span class="colortext">Samsung Captivate</span><br/>
-                                    <span>$ 550.00</span>
-                                    <span class="clear"></span>
-                                </li>
-                                <li>
-                                    <a href="#"><img src="../../../../public/static/images/content/product/lp3.jpg" alt="" class="alignleft" /></a>
-                                    <span class="colortext">iPod Touch</span><br/>
-                                    <span>$ 120.00</span>
-                                    <span class="clear"></span>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div><!-- end #sidebar -->
                 
                 <div class="clear"></div><!-- clear float -->
-            </div><!-- end #main -->
 		</div><!-- end #content -->
         
 		<div id="footer">
@@ -354,4 +320,20 @@ jQuery(document).ready(function(){
 </div><!-- end #outer-container -->
 		
 </body>
+<script>
+    var loginname = $('#loginname').val();
+    window.onload=function() {
+        if(loginname != ""){
+            var userinfo = document.getElementById("userinfo");
+            userinfo.innerText="个人中心";
+        } else {
+            var notlogin1 = document.getElementById("notlogin1");
+            notlogin1.innerText="登录";
+            var separator = document.getElementById("separator");
+            separator.innerText="|";
+            var notlogin2 = document.getElementById("notlogin2");
+            notlogin2.innerText="注册";
+        }
+    }
+</script>
 </html>
