@@ -51,6 +51,17 @@ jQuery(document).ready(function(){
 <script>
 (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
+<script type="text/javascript">
+    function checkAddressForm() {
+        var add = document.getElementById("address");
+        if(add.value == "") {
+            alert("地址不能为空");
+            return false;
+        } else {
+            return true;
+        }
+    }
+</script>
 </div>
 
 <div id="outer-container">
@@ -60,14 +71,7 @@ jQuery(document).ready(function(){
             <div id="nav">
                 <ul id="topnav" class="sf-menu">
                     <li><a href="/index">首页</a></li>
-                    <li><a href="/index/product">产品</a>
-                        <ul>
-                            <li><a href="portfolio.html">Portfolio One Column</a></li>
-                            <li><a href="portfolio2.html">Portfolio Two Column</a></li>
-                            <li><a href="portfolio3.html">Portfolio Three Column</a></li>
-                            <li><a href="portfolio4.html">Portfolio Four Column</a></li>
-                        </ul>
-                    </li>
+                    <li><a href="/index/product">产品</a> </li>
                     <li><a href="/index/contact">联系我们</a></li>
                     <li><a href="#" class="current">个人中心</a></li>
                     <li><a class="login" href="/index/logout">退出</a></li>
@@ -79,7 +83,7 @@ jQuery(document).ready(function(){
         <div id="header" class="innerpage">
         	<div class="shadow"></div>
         	<div class="container940">
-        		<h1 class="pagetitle">欢迎，</h1>
+        		<h1 class="pagetitle">欢迎，{$username}</h1>
                 <div class="clear"></div><!-- clear float -->
             </div><!-- end container940 -->
         </div><!-- end #header -->
@@ -89,6 +93,9 @@ jQuery(document).ready(function(){
                 <div id="main">
                     <div id="maincontent">
                         <h2 class="title_pattern uppercase"><span>我的购物车</span></h2>
+                        <div class="ts-display-product-img">
+                                <a href="#"> <img src="../../../../public/static/images/product/good1.jpg" width="30%" alt="" /></a>
+                             </div>
                         <div class="separator line"></div>
                         <h2 class="title_pattern uppercase"><span>订单管理</span></h2>
                         
@@ -105,7 +112,7 @@ jQuery(document).ready(function(){
                             </li>
                             <li class="widget-container">
                                 <h2 class="widget-title" style="color: #dc6a4d;">收货地址<span style="margin-left: 20px;"><button class="edit-address" data-toggle="modal" 
-                                    data-target="#login"  data-backdrop="false" style="background-color:lavenderblush;">
+                                    data-target="#edit-address"  data-backdrop="false" style="background-color: #dcb879;">
                                 修改</button></span></h2>
                                 <span>{$address}</span>
                             </li>
@@ -116,7 +123,37 @@ jQuery(document).ready(function(){
                 </div><!-- end #main -->
             </div><!-- end #content -->
             
-        
+        <!-- 模态框（Modal） -->
+        <div class="modal fade" id="edit-address" tabindex="-1" role="dialog">
+                <form action="/index/editAddress" method="POST" onsubmit="return checkAddressForm()">
+                    <div class="modal-dialog" role="document" style="width: 300px;height:270px;margin-top: 250px;">
+                    <div class="modal-content" >
+                        <div class="modal-header myModal-header">
+                        <button type="button" class="close myModal-header-close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 id="myModalLabel">修改收货地址</h4>
+                        </div>
+                                
+                        <div class="modal-body myModal-body">
+                            <div class="form-group">
+                                <div>
+                                    <input type="text" name="address" class="form-control myModal-input myModal-header-font" id="address" style="width:100%;" placeholder="请填入新的收货地址" >
+                                </div>
+                            </div>
+    
+                        </div><!--end modal-body myModal-body-->
+                
+                        <div class="modal-footer myModal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal" style="width:40px;height:24px;padding:1px;float:right;margin-right:30px;color:white;background-color:#1E253F;border:0px">取消
+                            </button>
+                            <button type="submit" id="edit-address" class="btn btn-primary" style="float:left;margin-left:30px;width:40px;height:24px;padding:1px">确定
+                            </button>
+                        </div><!--end modal-footer myModal-footer-->
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+
 		<div id="footer">
         <div id="footer-pattern">
         

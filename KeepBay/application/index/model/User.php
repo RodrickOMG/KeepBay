@@ -22,4 +22,11 @@ class User extends Model
         $address = $user['address'];
         return $address;
     }
+    public function createCart($username) { //向数据库中user表插入数据，存储用户信息
+        $data = ['cart_user' => $username, 'cart_amount' => 0];
+        Db::table('cart')->insert($data);
+    }
+    public function editAddress($username, $address) {
+        Db::table('user')->where('username', $username)->update(['address' => $address]);
+    }
 }

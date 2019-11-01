@@ -94,14 +94,7 @@ jQuery(document).ready(function(){
             <div id="nav">
                 <ul id="topnav" class="sf-menu">
                     <li><a href="/index">首页</a></li>
-                    <li><a href="/index/product" class="current">产品</a>
-                        <ul>
-                            <li><a href="portfolio.html">Portfolio One Column</a></li>
-                            <li><a href="portfolio2.html">Portfolio Two Column</a></li>
-                            <li><a href="portfolio3.html">Portfolio Three Column</a></li>
-                            <li><a href="portfolio4.html">Portfolio Four Column</a></li>
-                        </ul>
-                    </li>
+                    <li><a href="/index/product" class="current">产品</a></li>
                     <li><a href="/index/contact">联系我们</a></li>
                     <li><button class="login" data-toggle="modal" data-target="#login"  data-backdrop="false"><div id="notlogin1"></div>
                     </button></li>
@@ -215,13 +208,14 @@ jQuery(document).ready(function(){
                         {volist name="data" id="value" }
                             <li>
                                 <div class="ts-display-product-img">
-                                   <a href="single-product.html"> <img src="../../../../public/static/images/content/product/prod1.jpg" alt="" /></a>
-                                </div>
+                                   <a href="#"> <img src={$value.good_picpath} width="100%" alt="" /></a>
+                                </div><form action="/index/addToCart" method="POST">
                                 <div class="ts-display-product-text">
-                                <h2 class="colortext">{$value.name}</h2>
-                                <span class="productprice">¥ {$value.price}</span>
-                                <a href="single-product.html" class="button">Add to Cart</a>
-                                </div>
+                                <h2 class="colortext">{$value.good_name}</h2>
+                                <span class="productprice">¥ {$value.good_price}</span>
+                                <input style="height: 0px;" type='hidden' name='goodID' id="goodID" value="{$value.goodID}">
+                                <button  class="button" type="submit">加入购物车</button>
+                                </div></form>
                             </li>
                         {/volist}
                      </ul>

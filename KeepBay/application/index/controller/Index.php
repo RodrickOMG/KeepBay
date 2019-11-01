@@ -43,10 +43,8 @@ class Index extends Controller
                 $this->assign('address',$current_user['address']);
                 return view('user');
             } else {
-                $loginname = Session::get('username');
-                $this->assign('loginname',$loginname);
                 echo "<script type='text/javascript' >alert('密码错误')</script>";
-                return view('index');
+                $this->redirect('index');
             }
             
         } else {
@@ -65,14 +63,13 @@ class Index extends Controller
         $model = model('User');
         $find_username = $model->getUser($username);
         if ($find_username) {
-            $loginname = Session::get('username');
-            $this->assign('loginname',$loginname);
             echo "<script type='text/javascript' >alert('该用户已存在')</script>";
-            return view('index');
+            $this->redirect('index');
         } else {
             $this->assign('username',$username);
             $this->assign('sex',$sex);
             $model->register($username, $password, $sex);
+            $model->createCart($username);
             Session::set('username',$username);
             Session::set('sex',$sex);
             $loginname = Session::get('username');
@@ -85,9 +82,7 @@ class Index extends Controller
     }
     public function logout() {
         Session::set('username',"");
-        $loginname = Session::get('username');
-        $this->assign('loginname',$loginname);
-        return view('index');
+        $this->redirect('index');
     }
     public function gotouser() {
         $username = Session::get('username');
@@ -99,5 +94,18 @@ class Index extends Controller
         $this->assign('address',$address);
         return view('user');
     }
-    
+    public function editAddress() {
+        $username = Session::get('username');
+        $address = input('post.address');
+        $model = model('User');
+        $model->editAddress($username, $address);
+        $this->redirect('/index/gotouser');
+    }
+    public function addToCart() {
+        $goodID = input('post.goodID');
+        $username = Session::get('username');
+        $model = model('Cart');
+        $model->addToCart($goodID, $username);
+        $this->redirect('/index/product');
+    }
 }

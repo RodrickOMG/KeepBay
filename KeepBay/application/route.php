@@ -17,7 +17,8 @@ Route::rule('/gotouser/','"/index/Index/gotouser');
 Route::rule('/login/','"/index/Index/login');
 Route::rule('/register/','"/index/Index/register');
 Route::rule('/logout/','"/index/Index/logout');
-
+Route::rule('/editAddress/','"/index/Index/editAddress');
+Route::rule('/addToCart/','"/index/Index/addToCart');
 
 return [
     '__pattern__' => [
