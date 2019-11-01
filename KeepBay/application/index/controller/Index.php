@@ -90,8 +90,10 @@ class Index extends Controller
         $sex = Session::get('sex');
         $this->assign('sex',$sex);
         $model = model('User');
+        $cart = model('Cart');
         $address = $model->getUserAddress($username);
         $this->assign('address',$address);
+        $cart->showCart($username);
         return view('user');
     }
     public function editAddress() {
