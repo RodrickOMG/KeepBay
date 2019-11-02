@@ -76,16 +76,15 @@ class Index extends Controller
         $this->redirect('index');
     }
     public function gotouser() {
-        $model = model('User');
+        $user = model('User');
         $cart = model('Cart');
         $order = model('Order');//实例化模型
 
         $username = Session::get('username');
-
         $this->assign('username',$username);
-        $sex = $model->getSex($username);
+        $sex = $user->getSex($username);
         $this->assign('sex',$sex);
-        $address = $model->getUserAddress($username);
+        $address = $user->getUserAddress($username);
         $this->assign('address',$address);
         
         $cartinfo = $cart->showCart($username);
@@ -95,10 +94,6 @@ class Index extends Controller
 
         $order_ov = $order->orderOverview($username);
         $this->assign('order_ov', $order_ov);
-        
-        $orderID = input('post.orderID');
-        $order_detail = $order->orderDetail($orderID);
-        $this->assign('order_detail', $order_detail);
 
         return view('user');
     }
@@ -117,10 +112,28 @@ class Index extends Controller
         $this->redirect('/index/product');
     }
     public function createOrder() {
-        $username = Session::get('username');
         $order = model('Order');
+        $cart = model('Cart');
+        $username = Session::get('username');
         $orderID = $order->createOrder($username);
         $order->insertOrderGoods($orderID, $username);
+        $cart->clearCart($username);//创建订单完成后清空购物车
         $this->redirect('/index/gotouser');
+    }
+    public function orderDetails() {
+        $order = model('Order');
+        $user = model('User');
+
+        $orderID = input('post.orderID');
+        $this->assign('orderID', $orderID);
+        $order_amount = input('post.order_amount');
+        $this->assign('order_amount', $order_amount);
+        $order_details = $order->orderDetails($orderID);
+        $this->assign('order_details', $order_details);
+        $username = Session::get('username');
+        $this->assign('username',$username);
+        $address = $user->getUserAddress($username);
+        $this->assign('address',$address);
+        return view('order');
     }
 }

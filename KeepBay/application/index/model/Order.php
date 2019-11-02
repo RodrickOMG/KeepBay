@@ -35,16 +35,19 @@ class Order extends Model
     //     dump($orderinfo);
     //     //return $orderinfo;
     // }
-    public function orderDetail($orderID) {
+    public function orderDetails($orderID) {
         $order = Db::table('order_goods')->where('orderID', $orderID)->select();
         $order_goods = array();
         for($i = 0; $i < count($order); $i++) {
             $temp = Db::name('goods')->where('goodID',$order[$i]['goodID'])->select();
             $order_goods[$i]['good_name'] = $temp[0]['good_name'];
             $order_goods[$i]['good_price'] = $temp[0]['good_price'];
+            $order_goods[$i]['good_amount'] = $order[$i]['good_amount'];
+            $order_goods[$i]['good_quantity'] = $order[$i]['good_quantity'];
             $order_goods[$i]['good_picpath'] = $temp[0]['good_picpath'];
         }
-        dump($order_goods);
+        //dump($order_goods);
+        return $order_goods;
     }
     public function insertOrderGoods($orderID, $username) {
         $cart_goods = Db::name('cart_goods')->where('cart_user', $username)->select();
@@ -53,8 +56,8 @@ class Order extends Model
             $temp = Db::name('goods')->where('goodID',$cart_goods[$i]['goodID'])->select();
             $order_goods[$i]['orderID'] = $orderID;
             $order_goods[$i]['goodID'] = $temp[0]['goodID'];
-            $order_goods[$i]['good_quantity'] = $cart_goods[0]['quantity'];
-            $order_goods[$i]['good_amount'] = $cart_goods[0]['good_amount'];
+            $order_goods[$i]['good_quantity'] = $cart_goods[$i]['quantity'];
+            $order_goods[$i]['good_amount'] = $cart_goods[$i]['good_amount'];
         }
         for($i = 0; $i < count($order_goods); $i++) {
             Db::table('order_goods')->insert($order_goods[$i]);//根据商品ID的不同依次插入到order_goods表中

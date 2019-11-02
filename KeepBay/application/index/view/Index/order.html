@@ -51,18 +51,7 @@ jQuery(document).ready(function(){
 <script>
 (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
-<script type="text/javascript">
-    function checkAddressForm() {
-        var add = document.getElementById("address");
-        if(add.value == "") {
-            alert("地址不能为空");
-            return false;
-        } else {
-            return true;
-        }
-    }
 
-</script>
 </div>
 
 <div id="outer-container">
@@ -74,7 +63,7 @@ jQuery(document).ready(function(){
                     <li><a href="/index">首页</a></li>
                     <li><a href="/index/product">产品</a> </li>
                     <li><a href="/index/contact">联系我们</a></li>
-                    <li><a href="#" class="current">个人中心</a></li>
+                    <li><a href="/index/gotouser" >个人中心</a></li>
                     <li><a class="login" href="/index/logout">退出</a></li>
                 </ul><!-- #topnav -->
             </div><!-- #nav -->	
@@ -84,7 +73,8 @@ jQuery(document).ready(function(){
         <div id="header" class="innerpage">
         	<div class="shadow"></div>
         	<div class="container940">
-        		<h1 class="pagetitle">欢迎，{$username}</h1>
+                <h1 class="pagetitle"><a class="back" style="color: whitesmoke;text-decoration-line: none; text-decoration-color: #dc6a4d;" href="/index/gotouser">
+                    <img src="../../../../public/static/images/icons/back.png" width="30px"><span style="font-size: 20px;">返回</span></a></h1>
                 <div class="clear"></div><!-- clear float -->
             </div><!-- end container940 -->
         </div><!-- end #header -->
@@ -93,76 +83,44 @@ jQuery(document).ready(function(){
 		<div id="content" class="withsidebar">
                 <div id="main">
                     <div id="maincontent">
-                        <h2 class="title_pattern uppercase"><span>我的购物车</span></h2>
-                        <table border="1" style="border-color:whitesmoke">
-                             <tr>
-                                <th width="60%">商品</th>
-                                <th>单价</th>
-                                <th>数量</th>
-                                <th>小计</th>
-                            </tr>
-                            {volist name="cartinfo" id="value"}
-                            <tr>
-                                <td>
-                                    <div style="text-align: left;">
-                                        <a href="#"> <img src={$value.good_picpath} width="20%" alt="" /></a>
-                                        <span style="margin-left: 10px;">{$value.good_name}</span>
-                                    </div>
-                                </td>
-                                <td><span>¥{$value.good_price}</span></td>
-                                <td><span>{$value.quantity}</span></td>
-                                <td><span>¥{$value.good_amount}</span></td>
-                            </tr>
-                            {/volist}
-                        </table>
-                       <div id="cart-amount">
-                            <h5 style="color: #dc6a4d;position: relative;float: left;">合计：<span style="color:black">¥{$cart_amount}</span></h5>
-                            <a href="/index/createOrder" class="button" style="position: relative;float: right;" >购买</a>
-                       </div>
-                        
-                        <div class="separator line"></div>
-                        <h2 class="title_pattern uppercase"><span>订单管理</span></h2>
+                        <h2 class="title_pattern uppercase"><span>订单详情</span></h2>
+                        <h4>订单编号：<span>{$orderID}</span></h4>
+
                         <table border="1" style="border-color:whitesmoke">
                                 <tr>
-                                   <th>订单编号</th>
-                                   <th>下单时间</th>
-                                   <th>收件人</th>
-                                   <th>订单总价</th>
+                                   <th width="60%">商品</th>
+                                   <th>单价</th>
+                                   <th>数量</th>
+                                   <th>小计</th>
                                </tr>
-                               {volist name="order_ov" id="value"}
+                               {volist name="order_details" id="value"}
                                <tr>
-                                    <div style="text-align: left;">
-                                        <form action="/index/orderDetails" method="POST">
-                                        <input style="height: 0px;" type='hidden' name='orderID' id="orderID" value="{$value.orderID}">
-                                        <td width="10%"><button id="showOrderDetails" style="border: none;"type="submit">{$value.orderID}</button></td>
-                                       
-                                        <td ><span>{$value.create_time}</span></td>
-                                        <td><span>{$value.order_user}</span></td>
-                                        <td><span>{$value.order_amount}</span></td>
-                                        <input style="height: 0px;" type='hidden' name='order_amount' id="order_amount" value="{$value.order_amount}">
-                                    </form>
-                                    </div>
+                                   <td>
+                                       <div style="text-align: left;">
+                                           <a href="#"> <img src={$value.good_picpath} width="20%" alt="" /></a>
+                                           <span style="margin-left: 10px;">{$value.good_name}</span>
+                                       </div>
+                                   </td>
+                                   <td><span>¥{$value.good_price}</span></td>
+                                   <td><span>{$value.good_quantity}</span></td>
+                                   <td><span>¥{$value.good_amount}</span></td>
                                </tr>
                                {/volist}
-                               
                            </table>
-
+                           <h4 style="text-align: right;">订单总额：<span style="font-size: 15px;"> ¥{$order_amount}</span></h4>
                          <div class="clear"></div><!-- clear float -->
                     </div><!-- end #maincontent -->
                     <div id="sidebar" style="margin-left: 35px;">
                         <ul>
                             <li class="widget-container">
-                                <h2 class="widget-title" style="color: #dc6a4d;">个人信息</h2>
+                                <h2 class="widget-title" style="color: #dc6a4d;">收货人</h2>
                                 <div class="textwidget">
-                               <h6>用户名：<span>{$username}</span></h6>
-                               <h6>性别：<span>{$sex}</span></h6>
+                               <h6>{$username}</h6>
                                 </div>
                             </li>
                             <li class="widget-container">
-                                <h2 class="widget-title" style="color: #dc6a4d;">收货地址<span style="margin-left: 20px;"><button class="edit-address" data-toggle="modal" 
-                                    data-target="#edit-address"  data-backdrop="false" style="background-color: #dcb879;">
-                                修改</button></span></h2>
-                                <span>{$address}</span>
+                                <h2 class="widget-title" style="color: #dc6a4d;">收货地址<span style="margin-left: 20px;">
+                                </span></h2><span>{$address}</span>
                             </li>
                         </ul>
                     </div><!-- end #sidebar -->
@@ -171,35 +129,6 @@ jQuery(document).ready(function(){
                 </div><!-- end #main -->
             </div><!-- end #content -->
             
-        <!-- 模态框（Modal） -->
-        <div class="modal fade" id="edit-address" tabindex="-1" role="dialog">
-                <form action="/index/editAddress" method="POST" onsubmit="return checkAddressForm()">
-                    <div class="modal-dialog" role="document" style="width: 300px;height:270px;margin-top: 250px;">
-                    <div class="modal-content" >
-                        <div class="modal-header myModal-header">
-                        <button type="button" class="close myModal-header-close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 id="myModalLabel">修改收货地址</h4>
-                        </div>
-                                
-                        <div class="modal-body myModal-body">
-                            <div class="form-group">
-                                <div>
-                                    <input type="text" name="address" class="form-control myModal-input myModal-header-font" id="address" style="width:100%;" placeholder="请填入新的收货地址" >
-                                </div>
-                            </div>
-    
-                        </div><!--end modal-body myModal-body-->
-                
-                        <div class="modal-footer myModal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal" style="width:40px;height:24px;padding:1px;float:right;margin-right:30px;color:white;background-color:#1E253F;border:0px">取消
-                            </button>
-                            <button type="submit" id="edit-address" class="btn btn-primary" style="float:left;margin-left:30px;width:40px;height:24px;padding:1px">确定
-                            </button>
-                        </div><!--end modal-footer myModal-footer-->
-                        </div>
-                    </form>
-                </div>
-            </div>
 
 		<div id="footer">
         <div id="footer-pattern">

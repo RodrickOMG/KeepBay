@@ -125,6 +125,7 @@ span {font-size: 13px;}
 a, a:visited {text-decoration:none; font-weight:normal; color:#dc6a4d }
 a:hover{text-decoration:underline;}
 a img{border:none}
+a.back:visited {text-decoration:none; font-weight:normal; color:#dc6a4d }
 /* float align */
 .alignleft,
 img.alignleft {

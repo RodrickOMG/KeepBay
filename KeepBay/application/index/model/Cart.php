@@ -44,8 +44,8 @@ class Cart extends Model
     public function cartAmount($username) {
         return Db::name('cart')->where('cart_user',$username)->select()[0]['cart_amount'];
     }
+
     public function clearCart($username) {
         Db::table('cart_goods')->where('cart_user', $username)->delete();
-        Db::table('cart')->where('cart_user', $username)->delete();
     }
 }
