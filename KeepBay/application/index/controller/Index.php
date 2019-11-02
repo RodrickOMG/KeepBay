@@ -69,9 +69,8 @@ class Index extends Controller
             $this->assign('username',$username);
             $this->assign('sex',$sex);
             $model->register($username, $password, $sex);
-            $model->createCart($username);
+            $model->createCart($username);//创建用户的购物车
             Session::set('username',$username);
-            Session::set('sex',$sex);
             $loginname = Session::get('username');
             $this->assign('loginname',$loginname);
             $address = $model->getUserAddress($username);
@@ -85,29 +84,35 @@ class Index extends Controller
         $this->redirect('index');
     }
     public function gotouser() {
-        $username = Session::get('username');
-        $this->assign('username',$username);
-        $sex = Session::get('sex');
-        $this->assign('sex',$sex);
         $model = model('User');
         $cart = model('Cart');
+        $username = Session::get('username');
+        $this->assign('username',$username);
+        $sex = $model->getSex($username);
+        $this->assign('sex',$sex);
         $address = $model->getUserAddress($username);
         $this->assign('address',$address);
-        $cart->showCart($username);
+        $cartinfo = $cart->showCart($username);
+        $this->assign('cartinfo',$cartinfo);
+        $cart_amount = $cart->cartAmount($username);
+        $this->assign('cart_amount', $cart_amount);
         return view('user');
     }
-    public function editAddress() {
+    public function editAddress() { //修改收货地址
         $username = Session::get('username');
         $address = input('post.address');
         $model = model('User');
         $model->editAddress($username, $address);
         $this->redirect('/index/gotouser');
     }
-    public function addToCart() {
+    public function addToCart() { //将商品添加至购物车
         $goodID = input('post.goodID');
         $username = Session::get('username');
         $model = model('Cart');
         $model->addToCart($goodID, $username);
         $this->redirect('/index/product');
+    }
+    public function createOrder() {
+        $username = Session::get('username');
     }
 }

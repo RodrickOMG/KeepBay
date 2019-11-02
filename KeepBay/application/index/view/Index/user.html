@@ -93,28 +93,30 @@ jQuery(document).ready(function(){
                 <div id="main">
                     <div id="maincontent">
                         <h2 class="title_pattern uppercase"><span>我的购物车</span></h2>
-                        <table>
+                        <table border="1" style="border-color:whitesmoke">
                              <tr>
                                 <th width="60%">商品</th>
                                 <th>单价</th>
                                 <th>数量</th>
                                 <th>小计</th>
                             </tr>
-                            
+                            {volist name="cartinfo" id="value"}
                             <tr>
                                 <td>
                                     <div style="text-align: left;">
-                                        <a href="#"> <img src="../../../../public/static/images/product/good1.jpg" width="30%" alt="" /></a>
-                                        <span style="margin-left: 10px;">哑铃</span>
+                                        <a href="#"> <img src={$value.good_picpath} width="20%" alt="" /></a>
+                                        <span style="margin-left: 10px;">{$value.good_name}</span>
                                     </div>
                                 </td>
-                                <td>100</td>
-                                <td>100</td>
-                                <td>100</td>
+                                <td><span>¥{$value.good_price}</span></td>
+                                <td><span>{$value.quantity}</span></td>
+                                <td><span>¥{$value.good_amount}</span></td>
                             </tr>
-                            
+                            {/volist}
                         </table>
-                       
+                       <div id="cart-amount">
+                            <h5 style="color: #dc6a4d;">合计：<span style="color:black">¥{$cart_amount}</span></h5>
+                       </div>
                         
                         <div class="separator line"></div>
                         <h2 class="title_pattern uppercase"><span>订单管理</span></h2>

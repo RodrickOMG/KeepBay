@@ -18,9 +18,7 @@ class User extends Model
     }
     public function getUserAddress($username) {
         $data = Db::name('user')->where('username', $username)->select();
-        $user = $data[0];
-        $address = $user['address'];
-        return $address;
+        return $data[0]['address'];
     }
     public function createCart($username) { //向数据库中user表插入数据，存储用户信息
         $data = ['cart_user' => $username, 'cart_amount' => 0];
@@ -28,5 +26,9 @@ class User extends Model
     }
     public function editAddress($username, $address) {
         Db::table('user')->where('username', $username)->update(['address' => $address]);
+    }
+    public function getSex($username) {
+        $data = Db::table('user')->where('username', $username)->select();
+        return $data[0]['sex'];
     }
 }

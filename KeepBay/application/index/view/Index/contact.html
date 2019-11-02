@@ -389,19 +389,19 @@ jQuery(document).ready(function(){
     initMap();//创建和初始化地图
 </script>
 <script>
-        var loginname = $('#loginname').val();
-        window.onload=function() {
-            if(loginname != ""){
-                var userinfo = document.getElementById("userinfo");
-                userinfo.innerText="个人中心";
-            } else {
-                var notlogin1 = document.getElementById("notlogin1");
-                notlogin1.innerText="登录";
-                var separator = document.getElementById("separator");
-                separator.innerText="|";
-                var notlogin2 = document.getElementById("notlogin2");
-                notlogin2.innerText="注册";
-            }
+    var loginname = $('#loginname').val();
+    window.onload=function() {
+        if(loginname != ""){
+            var userinfo = document.getElementById("userinfo");
+            userinfo.innerText="个人中心";
+        } else {
+            var notlogin1 = document.getElementById("notlogin1");
+            notlogin1.innerText="登录";
+            var separator = document.getElementById("separator");
+            separator.innerText="|";
+            var notlogin2 = document.getElementById("notlogin2");
+            notlogin2.innerText="注册";
         }
-    </script>
+    }
+</script>
 </html>
