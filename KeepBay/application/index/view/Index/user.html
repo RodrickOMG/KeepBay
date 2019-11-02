@@ -115,12 +115,36 @@ jQuery(document).ready(function(){
                             {/volist}
                         </table>
                        <div id="cart-amount">
-                            <h5 style="color: #dc6a4d;">合计：<span style="color:black">¥{$cart_amount}</span></h5>
+                            <h5 style="color: #dc6a4d;position: relative;float: left;">合计：<span style="color:black">¥{$cart_amount}</span></h5>
+                            <a href="/index/createOrder" class="button" style="position: relative;float: right;" >购买</a>
                        </div>
                         
                         <div class="separator line"></div>
                         <h2 class="title_pattern uppercase"><span>订单管理</span></h2>
-                        
+                        <table border="1" style="border-color:whitesmoke">
+                                <tr>
+                                   <th>订单编号</th>
+                                   <th>下单时间</th>
+                                   <th>收件人</th>
+                                   <th>订单总价</th>
+                               </tr>
+                               {volist name="order_ov" id="value"}
+                               <tr>
+                                    <div style="text-align: left;">
+                                        <form action="/index/gotouser" method="POST">
+                                        <input style="height: 0px;" type='hidden' name='orderID' id="orderID" value="{$value.orderID}">
+                                        <td width="10%"><button style="border: none;" type="submit">{$value.orderID}</button></td>
+                                        </form>
+                                        <td ><span>{$value.create_time}</span></td>
+                                        <td><span>{$value.order_user}</span></td>
+                                        <td><span>{$value.order_amount}</span></td>
+                                    </div>
+                               </tr>
+                               {/volist}
+                               
+                           </table>
+
+
                          <div class="clear"></div><!-- clear float -->
                     </div><!-- end #maincontent -->
                     <div id="sidebar" style="margin-left: 35px;">

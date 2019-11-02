@@ -39,13 +39,10 @@ class Cart extends Model
             $cartinfo[$i]['good_price'] = $temp[0]['good_price'];
             $cartinfo[$i]['good_picpath'] = $temp[0]['good_picpath'];
         }
-        // dump($goodinfo);
-        // dump($cartinfo[0]);
         return $cartinfo;
     }
     public function cartAmount($username) {
-        $cart = Db::name('cart')->where('cart_user',$username)->select();
-        return $cart[0]['cart_amount'];
+        return Db::name('cart')->where('cart_user',$username)->select()[0]['cart_amount'];
     }
     public function clearCart($username) {
         Db::table('cart_goods')->where('cart_user', $username)->delete();

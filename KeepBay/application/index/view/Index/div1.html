@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="shortcut icon" href="../../../../public/static/images/favicon.ico" />
+<meta charset="UTF-8" />
+<meta name="robots" content="index, follow" />
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<title>KeepBay</title>
+<!-- ////////////////////////////////// -->
+<!-- //      Start Stylesheets       // -->
+<!-- ////////////////////////////////// -->
+<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+<link href="../../../../public/static/styles/style.css" rel="stylesheet" type="text/css" />
+<link href="../../../../public/static/styles/inner.css" rel="stylesheet" type="text/css" />
+<!--[if lt IE 9]>
+<link href="styles/ie8.css" rel="stylesheet" type="text/css" />
+<![endif]-->
+<!-- ////////////////////////////////// -->
+<!-- //      Javascript Files        // -->
+<!-- ////////////////////////////////// -->
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../../../public/static/js/jquery-1.6.4.min.js"></script>
+<script type="text/javascript" src="../../../../public/static/js/hoverIntent.js"></script> 
+<script type="text/javascript" src="../../../../public/static/js/superfish.js"></script> 
+<script type="text/javascript" src="../../../../public/static/js/supersubs.js"></script>
+<script type="text/javascript" src="../../../../public/static/js/contact.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?key=&v=1.1&services=true"></script>
+<script type="text/javascript">
+jQuery(document).ready(function(){
+	//Menu
+	jQuery("ul.sf-menu").supersubs({ 
+	minWidth		: 12,		// requires em unit.
+	maxWidth		: 27,		// requires em unit.
+	extraWidth		: 3	// extra width can ensure lines don't sometimes turn over due to slight browser differences in how they round-off values
+						   // due to slight rounding differences and font-family 
+	}).superfish();  // call supersubs first, then superfish, so that subs are 
+					 // not display:none when measuring. Call before initialising 
+					 // containing tabs for same reason. 
+					 
+});
+
+
+jQuery(document).ready(function() {
+		jQuery(".box_skitter_large").skitter({
+			animation: "random",
+			interval: 3000,
+			numbers: false, 
+			numbers_align: "right", 
+ 			hideTools: true,
+			controls: false,
+			focus: false,
+			focus_position: true,
+			width_label:'340px', 
+			enable_navigation_keys: true,   
+ 			progressbar: false
+		});
+	});				  
+					 
+});
+</script>
+<script type="text/javascript">
+    function checkLoginForm() {
+        var un = document.getElementById("username");
+        var pw = document.getElementById("password");
+        if(un.value == "") {
+            alert("用户名不能为空");
+            return false;
+        } else if (pw.value == "") {
+            alert("密码不能为空");
+            return false;
+        } else {
+            return true;
+        }
+    }
+    function checkRegisterForm() {
+        var sex = document.getElementById("sex");
+        var un = document.getElementById("username_log");
+        var pw = document.getElementById("password_log");
+        if(un.value == "") {
+            alert("用户名不能为空");
+            return false;
+        } else if (pw.value == "") {
+            alert("密码不能为空");
+            return false;
+        } else if (sex.value == "") {
+            alert("性别不能为空");
+            return false;
+        } else {
+            return true;
+        }
+    }
+</script>
+</head>
+<body>
+<div style="text-align:center;height:90px; width:100%;">
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- DEMO_970_90 -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:970px;height:90px"
+     data-ad-client="ca-pub-3553298197128602"
+     data-ad-slot="9659969381"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+
+<input type="hidden" id = "loginname" value="{$loginname}"><!--//用来获取$loginname-->
+
+<div id="outer-container">
+	<div id="container">
+    	<div id="top">
+        	<div id="logo"><a href="index"><img src="../../../../public/static/images/logo.png" width="270" height="110" alt=""  /></a></div><!-- end #logo -->
+            <div id="nav">
+                <ul id="topnav" class="sf-menu">
+                    <li><a href="/index"  class="current">首页</a></li>
+                    <li><a href="/index/product">产品</a>
+                        <!-- <ul>
+                            <li><a href="portfolio.html">Portfolio One Column</a></li>
+                            <li><a href="portfolio2.html">Portfolio Two Column</a></li>
+                            <li><a href="portfolio3.html">Portfolio Three Column</a></li>
+                            <li><a href="portfolio4.html">Portfolio Four Column</a></li>
+                        </ul> -->
+                    </li>
+                    <li><a href="/index/contact">联系我们</a></li>
+                    <li><button class="login" data-toggle="modal" data-target="#login"  data-backdrop="false"><div id="notlogin1"></div>
+                        </button></li>
+                    <li><div id="separator"></div></li>
+                    <li><button class="login" data-toggle="modal" data-target="#register"  data-backdrop="false"><div id="notlogin2"></div>
+                        </button></li>
+                    <li><a href="/index/gotouser"><div id="userinfo"></div></a></li>
+                </ul><!-- #topnav -->
+            </div><!-- #nav -->	
+        </div><!-- end #top -->
+        
+        <!-- 模态框（Modal） -->
+        <div class="modal fade" id="login" tabindex="-1" role="dialog">
+            <form action="/index/login" method="POST" onsubmit="return checkLoginForm()">
+                <div class="modal-dialog" role="document" style="width: 300px;height:270px;margin-top: 250px;">
+                <div class="modal-content" >
+                    <div class="modal-header myModal-header">
+                    <button type="button" class="close myModal-header-close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 id="myModalLabel">登录</h4>
+                    </div>
+                            
+                    <div class="modal-body myModal-body">
+                        <div class="form-group">
+                            <label for="username" class="myModal-header-font">帐号</label>
+                            <div>
+                                <input type="text" name="username" class="form-control myModal-input myModal-header-font" id="username" style="width:100%;" placeholder="请输入帐号" >
+                            </div>
+                        </div>
+                
+                        <div class="form-group">
+                            <label for="password" class="control-label myModal-header-font">密码</label>
+                            <div>
+                                <input type="password" name="password" class="form-control myModal-input myModal-header-font" style="border:solid 1px #ececec; font-size:11px; padding:8px 5px; border-radius:4px; -moz-border-radius:4px; -webkit-border-radius:4px;" id="password" placeholder="请输入密码">
+                            </div>
+                        </div>
+
+                    </div><!--end modal-body myModal-body-->
+            
+                    <div class="modal-footer myModal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" style="width:40px;height:24px;padding:1px;float:right;margin-right:30px;color:white;background-color:#1E253F;border:0px">取消
+                        </button>
+                        <button type="submit" id="login" class="btn btn-primary" style="float:left;margin-left:30px;width:40px;height:24px;padding:1px">确定
+                        </button>
+                    </div><!--end modal-footer myModal-footer-->
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="modal fade" id="register" tabindex="-1" role="dialog">
+                <form action="/index/register" method="POST" onsubmit="return checkRegisterForm()">
+                    <div class="modal-dialog" role="document" style="width: 300px;height:270px;margin-top: 250px;">
+                    <div class="modal-content" >
+                        <div class="modal-header myModal-header">
+                        <button type="button" class="close myModal-header-close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 id="myModalLabel">注册</h4>
+                        </div>
+                                
+                        <div class="modal-body myModal-body">
+                        <div class="form-group">
+                            <label for="username" class="myModal-header-font">帐号</label>
+                            <div>
+                                <input type="text" name="username" class="form-control myModal-input myModal-header-font" id="username_log" style="width:100%;" placeholder="请输入帐号" >
+                            </div>
+                        </div>
+                
+                        <div class="form-group">
+                            <label for="password" class="control-label myModal-header-font">密码</label>
+                            <div>
+                                <input type="password" name="password" class="form-control myModal-input myModal-header-font" style="border:solid 1px #ececec; font-size:11px; padding:8px 5px; border-radius:4px; -moz-border-radius:4px; -webkit-border-radius:4px;" id="password_log" placeholder="请输入密码">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                                <label for="name" class="myModal-header-font">性别</label>
+                                <select name="sex" style="border:solid 1px #ececec; font-size:11px; padding:8px 5px; border-radius:4px; -moz-border-radius:4px; -webkit-border-radius:4px;" id="sex" class="form-control myModal-input myModal-header-font myModal-select">
+                                    <option selected="selected" disabled="disabled"  style='display: none' value=''></option>
+                                    <option>男</option>
+                                    <option>女</option>
+                                    <option>保密</option>
+                                </select>
+                        </div>
+                        
+                        </div><!--end modal-body myModal-body-->
+                        <img src= "../../../../public/static/images/product/good1.jpg"width="32"height="32"alt="">
+                        <div class="modal-footer myModal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal" style="width:40px;height:24px;padding:1px;float:right;margin-right:30px;color:white;background-color:#1E253F;border:0px">取消
+                            </button>
+                            <button type="submit" id="login" class="btn btn-primary" style="float:left;margin-left:30px;width:40px;height:24px;padding:1px">确定
+                            </button>
+                        </div><!--end modal-footer myModal-footer-->
+                    </div>
+                </form>
+                </div>
+            </div>
+        </head>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+ <style>
+        .wrap{
+            width:900px;
+            margin:0 auto;
+            position: relative;
+        }
+        #left{
+            width:50%;
+            height:500px;
+            background: #ccffff;
+            position: absolute;
+            top:0;
+            left:0;
+        }
+        #right{
+            width:50%;
+            height:500px;
+            background: yellow;
+            position: absolute;
+            top:0;
+            right:0;
+        }
+    </style>
+
+</head>
+<body>
+<div class="wrap">
+    <div id="left">
+        <p style="text-align:left"><img src="../../../../public/static/images/product/good1.jpg"  alt="华亚专业杠铃" width="450px" height="500px"/></p>
+    </div>
+    <div id="right">
+        <h5 style="text-align:center" >华亚杠铃男士可拆卸环保手胶杠铃组合家用健身器材20公斤</h5>
+        <div style="text-align: center; font-size: 20px;">
+            <p style="background-color: red; color: white; display: inline;">标准价：1000RMB</p>
+            <p style="background-color: green; color: white; display: inline;">折扣价：800RMB</p>
+        </div>
+        
+            <h2 style="text-align:center">商品介绍</h2>
+            <div style="text-align: center;">
+                <p>发货仓库：上海仓 北京仓 重庆仓 广州仓</p>
+                <p>快递公司：圆通快递 中通快递 韵达快递</p>
+                <p>环保安全杠铃：环保无味 家用不伤地板</p>
+                <p>重量调节杠铃：自主调节 合理健身</p>
+                <p>牢固可靠杠铃：加装防松动螺母防滑</p>
+                <p>做工精细杠铃：螺旋纹路技术 钻石纹理技术</p>
+            </div>
+            <div align="center" style="position:relative;top:10px">
+            <button style="text-align: center" color="blue">加入购物车</button>
+            </div>
+    </div>
+</div>
+</body>
+</html>
+           
+        
+    </div>
+    <div style="position:relative;top:500px">
+            <div id="footer">
+                    <div id="footer-pattern">
+                    
+                        <div class="container940">
+                            <div id="footcol1">
+                                <ul>
+                                    <li class="widget-container">
+                                        <h2 class="widget-title">选购及了解</h2>
+                                            <ul>
+                                                <li><a href="#">全身性健身器械</a></li>
+                                                <li><a href="#">局部性健身器械</a></li>
+                                                <li><a href="#">小型健身器材</a></li>
+                                            </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div id="footcol2">
+                                <ul>
+                                    <li class="widget-container">
+                                        <h2 class="widget-title">工具与App</h2>
+                                        <ul>
+                                            <li><a href="#">下载</a></li>
+                                            <li><a href="#">开发人员</a></li>
+                                            <li><a href="#">安全中心</a></li>
+                                            <li><a href="#">网站导览</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div id="footcol3">
+                                <ul>
+                                    <li class="widget-container">
+                                        <h2 class="widget-title">健身社区</h2>
+                                        <ul>
+                                            <li><a href="#">公告</a></li>
+                                            <li><a href="#">资讯中心</a></li>
+                                            <li><a href="#">讨论区</a></li>
+                                            <li><a href="#">热门推荐</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div id="footcol4">
+                                <ul>
+                                    <li class="widget-container">
+                                        <h2 class="widget-title">关于KeepBay</h2>
+                                        <ul>
+                                            <li><a href="#">公司简介</a></li>
+                                            <li><a href="#">新闻</a></li>
+                                            <li><a href="#">工作机会</a></li>
+                                            <li><a href="#">广告机会</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="clear"></div><!-- clear float -->
+                        </div><!-- end container940 -->
+                        
+                    </div><!-- end #footer-pattern -->  
+                    </div><!-- end #footer -->
+                    
+                    <div id="after-footer">
+                        <div class="container940">
+                            <div id="sn">
+                                <ul>
+                                    <li><a href="#"><img src="../../../../public/static/images/icons/weibo.png" width="32" height="32" alt="" /></a></li>
+                                    <li><a href="#"><img src="../../../../public/static/images/icons/wechat.png" width="32" height="32" alt="" /></a></li>
+                                    <li><a href="#"><img src="../../../../public/static/images/icons/fb.png" width="32" height="32" alt="" /></a></li>
+                                    <li><a href="#"><img src="../../../../public/static/images/icons/twitter.png" width="32" height="32" alt="" /></a></li>
+                                    <li><a href="#"><img src="../../../../public/static/images/icons/youtube.png" width="32" height="32" alt="" /></a></li>
+                                </ul>
+                            </div>
+                            <div id="footertext">
+                                Copyright &copy; 2019 KeepBay All Rights Reserved.
+                            </div>
+                           <div class="clear"></div><!-- clear float -->
+                        </div><!-- end container940 -->
+                    </div><!-- end #after-footer -->
+                    
+                </div><!-- end #container -->
+            </div><!-- end #outer-container -->
+            </body>
+            <script>
+                var loginname = $('#loginname').val();
+                window.onload=function() {
+                    if(loginname != ""){
+                        var userinfo = document.getElementById("userinfo");
+                        userinfo.innerText="个人中心";
+                    } else {
+                        var notlogin1 = document.getElementById("notlogin1");
+                        notlogin1.innerText="登录";
+                        var separator = document.getElementById("separator");
+                        separator.innerText="|";
+                        var notlogin2 = document.getElementById("notlogin2");
+                        notlogin2.innerText="注册";
+                    }
+                }
+            </script>
+            </html>
+          

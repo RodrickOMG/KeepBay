@@ -19,6 +19,8 @@ Route::rule('/register/','"/index/Index/register');
 Route::rule('/logout/','"/index/Index/logout');
 Route::rule('/editAddress/','"/index/Index/editAddress');
 Route::rule('/addToCart/','"/index/Index/addToCart');
+Route::rule('/createOrder/','"/index/Index/createOrder');
+Route::rule('/viewOrderDetails/','"/index/Index/viewOrderDetails');
 
 return [
     '__pattern__' => [

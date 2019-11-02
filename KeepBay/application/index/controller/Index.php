@@ -37,11 +37,7 @@ class Index extends Controller
             if($current_user['password'] == $password) {
                 $this->assign('username',$username);
                 Session::set('username',$username);
-                $loginname = Session::get('username');
-                $this->assign('loginname',$loginname);
-                $this->assign('sex',$current_user['sex']);
-                $this->assign('address',$current_user['address']);
-                return view('user');
+                $this->redirect('/index/gotouser');
             } else {
                 echo "<script type='text/javascript' >alert('密码错误')</script>";
                 $this->redirect('index');
@@ -71,11 +67,7 @@ class Index extends Controller
             $model->register($username, $password, $sex);
             $model->createCart($username);//创建用户的购物车
             Session::set('username',$username);
-            $loginname = Session::get('username');
-            $this->assign('loginname',$loginname);
-            $address = $model->getUserAddress($username);
-            $this->assign('address',$address);
-            return view('user');
+            $this->redirect('/index/gotouser');
         }
         
     }
@@ -86,16 +78,28 @@ class Index extends Controller
     public function gotouser() {
         $model = model('User');
         $cart = model('Cart');
+        $order = model('Order');//实例化模型
+
         $username = Session::get('username');
+
         $this->assign('username',$username);
         $sex = $model->getSex($username);
         $this->assign('sex',$sex);
         $address = $model->getUserAddress($username);
         $this->assign('address',$address);
+        
         $cartinfo = $cart->showCart($username);
         $this->assign('cartinfo',$cartinfo);
         $cart_amount = $cart->cartAmount($username);
         $this->assign('cart_amount', $cart_amount);
+
+        $order_ov = $order->orderOverview($username);
+        $this->assign('order_ov', $order_ov);
+        
+        $orderID = input('post.orderID');
+        $order_detail = $order->orderDetail($orderID);
+        $this->assign('order_detail', $order_detail);
+
         return view('user');
     }
     public function editAddress() { //修改收货地址
@@ -114,5 +118,9 @@ class Index extends Controller
     }
     public function createOrder() {
         $username = Session::get('username');
+        $order = model('Order');
+        $orderID = $order->createOrder($username);
+        $order->insertOrderGoods($orderID, $username);
+        $this->redirect('/index/gotouser');
     }
 }
