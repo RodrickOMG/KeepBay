@@ -47,5 +47,6 @@ class Cart extends Model
 
     public function clearCart($username) {
         Db::table('cart_goods')->where('cart_user', $username)->delete();
+        Db::table('cart')->where('cart_user', $username)->update(['cart_amount' => 0]);//将用户购物车金额重置为0
     }
 }

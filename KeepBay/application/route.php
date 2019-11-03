@@ -21,6 +21,8 @@ Route::rule('/editAddress/','"/index/Index/editAddress');
 Route::rule('/addToCart/','"/index/Index/addToCart');
 Route::rule('/createOrder/','"/index/Index/createOrder');
 Route::rule('/orderDetails/','"/index/Index/orderDetails');
+Route::rule('/cancelOrder/','"/index/Index/cancelOrder');
+Route::rule('/confirmCancelOrder/','"/index/Index/confirmCancelOrder');
 
 return [
     '__pattern__' => [

@@ -63,4 +63,8 @@ class Order extends Model
             Db::table('order_goods')->insert($order_goods[$i]);//根据商品ID的不同依次插入到order_goods表中
         }
     }
+    public function cancelOrder($orderID) {
+        Db::table('order_goods')->where('orderID', $orderID)->delete();
+        Db::table('order')->where('orderID', $orderID)->delete();
+    }
 }

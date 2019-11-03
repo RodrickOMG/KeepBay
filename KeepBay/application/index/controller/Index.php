@@ -136,4 +136,18 @@ class Index extends Controller
         $this->assign('address',$address);
         return view('order');
     }
+    public function confirmCancelOrder() {
+        $orderID = input('post.orderid');
+        echo "<script type='text/javascript' >if(confirm('您确定要取消该订单吗？')){  
+            location.href='/index/cancelOrder?orderid=${orderID}'//如果用户确定，则用get方法传递orderid，从而进行取消订单的操作
+        }else{  
+            location.href='javascript:history.go(-1);'//用户取消操作，返回上一级
+        }  </script>";
+    }
+    public function cancelOrder() {
+        $orderID = input('get.orderid');
+        $order = model('Order');
+        $order->cancelOrder($orderID);
+        $this->redirect('/index/gotouser');
+    }
 }

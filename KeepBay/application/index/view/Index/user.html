@@ -61,7 +61,6 @@ jQuery(document).ready(function(){
             return true;
         }
     }
-
 </script>
 </div>
 
@@ -122,25 +121,27 @@ jQuery(document).ready(function(){
                         
                         <div class="separator line"></div>
                         <h2 class="title_pattern uppercase"><span>订单管理</span></h2>
-                        <table border="1" style="border-color:whitesmoke">
+                        <table border="1" style="border-color:whitesmoke;">
                                 <tr>
                                    <th>订单编号</th>
                                    <th>下单时间</th>
-                                   <th>收件人</th>
                                    <th>订单总价</th>
+                                   <th>取消订单</th>
                                </tr>
                                {volist name="order_ov" id="value"}
                                <tr>
                                     <div style="text-align: left;">
                                         <form action="/index/orderDetails" method="POST">
-                                        <input style="height: 0px;" type='hidden' name='orderID' id="orderID" value="{$value.orderID}">
-                                        <td width="10%"><button id="showOrderDetails" style="border: none;"type="submit">{$value.orderID}</button></td>
-                                       
-                                        <td ><span>{$value.create_time}</span></td>
-                                        <td><span>{$value.order_user}</span></td>
-                                        <td><span>{$value.order_amount}</span></td>
-                                        <input style="height: 0px;" type='hidden' name='order_amount' id="order_amount" value="{$value.order_amount}">
-                                    </form>
+                                            <input style="height: 0px;" type='hidden' name='orderID' id="orderID" value="{$value.orderID}">
+                                            <td width="10%"><button id="showOrderDetails" style="border: none;"type="submit">{$value.orderID}</button></td>
+                                            <td ><span>{$value.create_time}</span></td>
+                                            <td><span>¥{$value.order_amount}</span></td>
+                                            <input style="height: 0px;" type='hidden' name='order_amount' id="order_amount" value="{$value.order_amount}">
+                                        </form>
+                                        <form action="/index/confirmCancelOrder" method="POST">
+                                            <input style="height: 0px;" type='hidden' name='orderid' id="orderid" value="{$value.orderID}">
+                                            <td><button style="color: red; ">X</button></td>
+                                        </form>
                                     </div>
                                </tr>
                                {/volist}
@@ -149,6 +150,8 @@ jQuery(document).ready(function(){
 
                          <div class="clear"></div><!-- clear float -->
                     </div><!-- end #maincontent -->
+
+
                     <div id="sidebar" style="margin-left: 35px;">
                         <ul>
                             <li class="widget-container">
@@ -160,7 +163,7 @@ jQuery(document).ready(function(){
                             </li>
                             <li class="widget-container">
                                 <h2 class="widget-title" style="color: #dc6a4d;">收货地址<span style="margin-left: 20px;"><button class="edit-address" data-toggle="modal" 
-                                    data-target="#edit-address"  data-backdrop="false" style="background-color: #dcb879;">
+                                    data-target="#edit-address" data-backdrop="false" style="background-color: #dcb879;">
                                 修改</button></span></h2>
                                 <span>{$address}</span>
                             </li>
@@ -198,8 +201,8 @@ jQuery(document).ready(function(){
                         </div><!--end modal-footer myModal-footer-->
                         </div>
                     </form>
-                </div>
-            </div>
+             </div>
+         </div>
 
 		<div id="footer">
         <div id="footer-pattern">
@@ -283,10 +286,5 @@ jQuery(document).ready(function(){
         
 	</div><!-- end #container -->
 </div><!-- end #outer-container -->
-<script>
-    $(function(){
-        $('#myModal').modal('show')
-    });
-</script>
 </body>
 </html>
