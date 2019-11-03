@@ -39,8 +39,7 @@ class Index extends Controller
                 Session::set('username',$username);
                 $this->redirect('/index/gotouser');
             } else {
-                echo "<script type='text/javascript' >alert('密码错误')</script>";
-                $this->redirect('index');
+                echo "<script type='text/javascript' >alert('密码错误');location.href='/index'</script>";
             }
             
         } else {
@@ -59,8 +58,7 @@ class Index extends Controller
         $model = model('User');
         $find_username = $model->getUser($username);
         if ($find_username) {
-            echo "<script type='text/javascript' >alert('该用户已存在')</script>";
-            $this->redirect('index');
+            echo "<script type='text/javascript' >alert('该用户已存在');location.href='/index'</script>";
         } else {
             $this->assign('username',$username);
             $this->assign('sex',$sex);
