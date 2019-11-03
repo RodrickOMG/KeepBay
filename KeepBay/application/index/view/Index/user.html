@@ -109,7 +109,13 @@ jQuery(document).ready(function(){
                                     </div>
                                 </td>
                                 <td><span>¥{$value.good_price}</span></td>
-                                <td><span>{$value.quantity}</span></td>
+                                <td style="padding: 0px;">
+                                    <a href="/index/plusItem?goodid={$value.goodID}"><img src="../../../../public/static/images/icons/plus.png" style=" width: 10px;padding-bottom: 3px;padding-right: 3px;"></a>
+                                    
+                                    <span>{$value.quantity}</span>
+                                    
+                                    <a href="/index/minusItem?goodid={$value.goodID}"><img src="../../../../public/static/images/icons/minus.png" style=" width: 10px;padding-bottom: 3px;padding-left: 3px;"></a>
+                                </td>
                                 <td><span>¥{$value.good_amount}</span></td>
                             </tr>
                             {/volist}

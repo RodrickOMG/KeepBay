@@ -21,8 +21,7 @@ class Cart extends Model
             Db::table('cart_goods')->insert($data);
         }
         //更新购物车金额总数
-        $cart = Db::name('cart')->where('cart_user',$username)->select();
-        $current_cart_amount = $cart[0]['cart_amount'];
+        $current_cart_amount = Db::name('cart')->where('cart_user',$username)->select()[0]['cart_amount'];
         Db::table('cart')->where('cart_user', $username)->update(['cart_amount' => $current_cart_amount + $good_price]);
     }
     // public function getSameGood($goodID) {
@@ -48,5 +47,27 @@ class Cart extends Model
     public function clearCart($username) {
         Db::table('cart_goods')->where('cart_user', $username)->delete();
         Db::table('cart')->where('cart_user', $username)->update(['cart_amount' => 0]);//将用户购物车金额重置为0
+    }
+    public function plusItem($username, $goodID) {
+        $good_price = Db('goods')->where('goodID',$goodID)->select()[0]['good_price'];
+        $current_cart_amount = Db::name('cart')->where('cart_user',$username)->select()[0]['cart_amount'];
+        Db::table('cart')->where('cart_user', $username)->update(['cart_amount' => $current_cart_amount + $good_price]);//更新购物车总额
+        $current_good_quantity = Db::name('cart_goods')->where('cart_user',$username)->where('goodID', $goodID)->select()[0]['quantity'];
+        $current_good_amount = Db::name('cart_goods')->where('cart_user',$username)->where('goodID', $goodID)->select()[0]['good_amount'];
+        Db::table('cart_goods')->where('cart_user', $username)->where('goodID', $goodID)->update(['good_amount' => $current_good_amount + $good_price,'quantity'=>$current_good_quantity + 1]);
+    }
+    public function minusItem($username, $goodID) {
+        $good_price = Db('goods')->where('goodID',$goodID)->select()[0]['good_price'];
+        $current_cart_amount = Db::name('cart')->where('cart_user',$username)->select()[0]['cart_amount'];
+        Db::table('cart')->where('cart_user', $username)->update(['cart_amount' => $current_cart_amount - $good_price]);//更新购物车总额
+        $current_good_quantity = Db::name('cart_goods')->where('cart_user',$username)->where('goodID', $goodID)->select()[0]['quantity'];
+        if($current_good_quantity == 1){
+            Db::table('cart_goods')->where('cart_user', $username)->where('goodID', $goodID)->delete();
+        } else {
+            $current_good_amount = Db::name('cart_goods')->where('cart_user',$username)->where('goodID', $goodID)->select()[0]['good_amount'];
+            Db::table('cart_goods')->where('cart_user', $username)->where('goodID', $goodID)->update(['good_amount' => $current_good_amount - $good_price,'quantity'=>$current_good_quantity - 1]);
+        }
+        
+        
     }
 }

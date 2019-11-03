@@ -114,6 +114,7 @@ class Index extends Controller
     public function createOrder() {
         $order = model('Order');
         $cart = model('Cart');
+
         $username = Session::get('username');
         $orderID = $order->createOrder($username);
         $order->insertOrderGoods($orderID, $username);
@@ -136,7 +137,7 @@ class Index extends Controller
         $this->assign('address',$address);
         return view('order');
     }
-    public function confirmCancelOrder() {
+    public function confirmCancelOrder() {//弹出取消订单确认框
         $orderID = input('post.orderid');
         echo "<script type='text/javascript' >if(confirm('您确定要取消该订单吗？')){  
             location.href='/index/cancelOrder?orderid=${orderID}'//如果用户确定，则用get方法传递orderid，从而进行取消订单的操作
@@ -148,6 +149,20 @@ class Index extends Controller
         $orderID = input('get.orderid');
         $order = model('Order');
         $order->cancelOrder($orderID);
+        $this->redirect('/index/gotouser');
+    }
+    public function plusItem() {
+        $cart = model('Cart');
+        $goodID = input('get.goodid');
+        $username = Session::get('username');
+        $cart->plusItem($username, $goodID);
+        $this->redirect('/index/gotouser');
+    }
+    public function minusItem() {
+        $cart = model('Cart');
+        $goodID = input('get.goodid');
+        $username = Session::get('username');
+        $cart->minusItem($username, $goodID);
         $this->redirect('/index/gotouser');
     }
 }

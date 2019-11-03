@@ -23,6 +23,8 @@ Route::rule('/createOrder/','"/index/Index/createOrder');
 Route::rule('/orderDetails/','"/index/Index/orderDetails');
 Route::rule('/cancelOrder/','"/index/Index/cancelOrder');
 Route::rule('/confirmCancelOrder/','"/index/Index/confirmCancelOrder');
+Route::rule('/plusItem/','"/index/Index/plusItem');
+Route::rule('/minusItem/','"/index/Index/minusItem');
 
 return [
     '__pattern__' => [

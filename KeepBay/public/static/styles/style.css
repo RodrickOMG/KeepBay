@@ -528,6 +528,7 @@ button:hover{text-decoration:none; color:#dc6a4d; cursor:pointer}
 	
 }
 .button.large:hover{background-position:0 0;}
+.button.small:hover{background-position:0 0;}
 
 
 /* Tabs */
